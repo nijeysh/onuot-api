@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: onuot-api
+
+  profiles:
+    active: local
+
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+    open-in-view: false
+
+server:
+  port: 8080
+
+jwt:
+  access-token-expiry: 1800000      # 30분
+  refresh-token-expiry: 604800000   # 7일
+
+weather:
+  api:
+    base-url: ${WEATHER_API_BASE_URL:}
+    service-key: ${WEATHER_API_SERVICE_KEY:}
