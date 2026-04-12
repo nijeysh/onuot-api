@@ -24,7 +24,9 @@ public enum ErrorCode {
     INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "MBR_003", "비밀번호가 일치하지 않습니다."),
 
     // Weather (WTH)
-    WEATHER_API_ERROR(HttpStatus.SERVICE_UNAVAILABLE, "WTH_001", "기상청 API 호출에 실패했습니다."),
+    WEATHER_API_ERROR(HttpStatus.SERVICE_UNAVAILABLE, "WTH_001", "날씨 API 호출에 실패했습니다."),
+    WEATHER_PROVIDER_UNAVAILABLE(HttpStatus.SERVICE_UNAVAILABLE, "WTH_002", "날씨 제공자가 응답하지 않습니다."),
+    WEATHER_ALL_PROVIDERS_FAILED(HttpStatus.SERVICE_UNAVAILABLE, "WTH_003", "모든 날씨 제공자 호출에 실패했습니다."),
 
     // Outfit (OFT)
     // 추후 추가

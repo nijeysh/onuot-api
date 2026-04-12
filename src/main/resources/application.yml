@@ -19,6 +19,26 @@ jwt:
   refresh-token-expiry: 604800000   # 7일
 
 weather:
-  api:
-    base-url: ${WEATHER_API_BASE_URL:}
-    service-key: ${WEATHER_API_SERVICE_KEY:}
+  cache:
+    current-ttl: 1800
+    forecast-ttl: 3600
+  providers:
+    kma:
+      enabled: true
+      base-url: ${KMA_API_BASE_URL:https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0}
+      service-key: ${KMA_API_SERVICE_KEY:}
+    airkorea:
+      enabled: true
+      base-url: ${AIRKOREA_API_BASE_URL:https://apis.data.go.kr/B552584/ArpltnInforInqireSvc}
+      service-key: ${AIRKOREA_API_SERVICE_KEY:}
+    openweathermap:
+      enabled: false
+      base-url: https://api.openweathermap.org/data/3.0
+      api-key: ${OWM_API_KEY:}
+  strategy:
+    current: KMA
+    hourly-forecast: KMA
+    daily-forecast: KMA
+    air-quality: AIRKOREA
+    uv-index: OPENWEATHERMAP
+    fallback: OPENWEATHERMAP

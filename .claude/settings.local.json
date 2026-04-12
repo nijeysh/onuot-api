@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew compileJava)",
+      "Bash(where java:*)",
+      "Bash(reg query:*)",
+      "WebSearch",
+      "WebFetch(domain:www.baeldung.com)",
+      "WebFetch(domain:reintech.io)",
+      "WebFetch(domain:herbertograca.com)",
+      "WebFetch(domain:deviq.com)",
+      "Bash(xargs sed:*)",
+      "Bash(mkdir -p modules)",
+      "Bash(mv member:*)"
+    ]
+  }
+}
