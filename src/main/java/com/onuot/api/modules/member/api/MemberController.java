@@ -1,4 +1,4 @@
-package com.onuot.api.modules.member.interfaces;
+package com.onuot.api.modules.member.api;
 
 import com.onuot.api.modules.member.application.MemberService;
 import com.onuot.api.modules.member.application.dto.LoginRequest;

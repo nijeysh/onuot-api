@@ -27,21 +27,21 @@
 각 바운디드 컨텍스트는 다음 레이어 구조를 따른다:
 
 ```
-interfaces/   ─── HTTP 진입점 (Controller)
+api/            ─── HTTP 진입점 (Controller)
     │
-application/  ─── 유스케이스 오케스트레이션 (Service, DTO)
+application/   ─── 유스케이스 오케스트레이션 (Service, DTO)
     │
-domain/       ─── 핵심 도메인 (Entity, Repository interface, Value Object)
+domain/        ─── 핵심 도메인 (Entity, Repository interface, Value Object)
     │
 infrastructure/ ─ 기술 구현체 (외부 API 어댑터, 설정) — weather만 해당
 ```
 
-**의존성 방향**: `interfaces → application → domain ← infrastructure`
+**의존성 방향**: `api → application → domain ← infrastructure`
 
 - `domain/`: 외부 기술에 의존하지 않음 (`global.common.BaseEntity` 제외)
 - `application/`: `domain`만 import, `infrastructure` import 금지
 - `infrastructure/`: `domain`만 import
-- `interfaces/`: `application`만 import
+- `api/`: `application`만 import
 - **컨텍스트 간 직접 import 금지** — ID 참조만 허용
 
 ### MSA 대비 설계
@@ -90,7 +90,7 @@ com.onuot.api
     │   │       ├── SignUpRequest.java
     │   │       ├── LoginRequest.java
     │   │       └── MemberResponse.java
-    │   └── interfaces/
+    │   └── api/
     │       └── MemberController.java
     │
     ├── calendar/                       # future: calendar-service
@@ -102,7 +102,7 @@ com.onuot.api
     │   │   └── dto/
     │   │       ├── CalendarEventRequest.java
     │   │       └── CalendarEventResponse.java
-    │   └── interfaces/
+    │   └── api/
     │       └── CalendarController.java
     │
     ├── outfit/                         # future: weather-service 포함
@@ -112,7 +112,7 @@ com.onuot.api
     │   ├── application/
     │   │   ├── OutfitService.java
     │   │   └── dto/OutfitResponse.java
-    │   └── interfaces/
+    │   └── api/
     │       └── OutfitController.java
     │
     └── weather/                        # future: weather-service
@@ -153,7 +153,7 @@ com.onuot.api
         │           ├── OwmWeatherProvider.java
         │           ├── OwmApiClient.java
         │           └── dto/OwmOneCallResponse.java
-        └── interfaces/
+        └── api/
             └── WeatherController.java
 ```
 

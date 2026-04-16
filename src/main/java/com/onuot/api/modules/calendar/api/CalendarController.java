@@ -1,4 +1,4 @@
-package com.onuot.api.modules.calendar.interfaces;
+package com.onuot.api.modules.calendar.api;
 
 import com.onuot.api.modules.calendar.application.CalendarService;
 import com.onuot.api.modules.calendar.application.dto.CalendarEventRequest;

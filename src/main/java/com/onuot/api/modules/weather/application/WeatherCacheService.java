@@ -1,7 +1,6 @@
 package com.onuot.api.modules.weather.application;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import com.onuot.api.modules.weather.domain.model.NormalizedWeatherData;
 import com.onuot.api.modules.weather.infrastructure.config.WeatherProviderConfig;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +41,7 @@ public class WeatherCacheService {
         try {
             String json = objectMapper.writeValueAsString(data);
             redisTemplate.opsForValue().set(key, json, config.getCache().getCurrentTtl(), TimeUnit.SECONDS);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.warn("Redis 캐시 저장 실패: key={}", key, e);
         }
     }

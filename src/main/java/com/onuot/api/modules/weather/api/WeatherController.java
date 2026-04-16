@@ -1,4 +1,4 @@
-package com.onuot.api.modules.weather.interfaces;
+package com.onuot.api.modules.weather.api;
 
 import com.onuot.api.global.common.ApiResponse;
 import com.onuot.api.modules.weather.application.WeatherAggregationService;

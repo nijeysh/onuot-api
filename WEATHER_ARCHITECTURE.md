@@ -16,46 +16,48 @@
 ## 2. 패키지 구조
 
 ```
-com.onuot.api.domain.weather
-├── controller/
+com.onuot.api.modules.weather
+├── api/
 │   └── WeatherController.java              # GET /api/weather 엔드포인트
-├── service/
+├── application/
 │   ├── WeatherAggregationService.java      # Provider 조합 + 캐싱 오케스트레이션
-│   └── WeatherCacheService.java            # Redis 캐시 R/W
-├── provider/
-│   ├── WeatherProvider.java                # 공통 인터페이스
+│   ├── WeatherCacheService.java            # Redis 캐시 R/W
+│   └── dto/
+│       ├── WeatherRequest.java
+│       └── WeatherResponse.java            # record 기반, 프론트엔드 WeatherData와 1:1 매칭
+├── domain/
+│   ├── WeatherProvider.java                # 공통 인터페이스 (outbound port)
 │   ├── WeatherProviderType.java            # enum: KMA, AIRKOREA, OPENWEATHERMAP
 │   ├── WeatherDataCapability.java          # enum: CURRENT, HOURLY_FORECAST, DAILY_FORECAST, AIR_QUALITY, UV_INDEX
-│   ├── kma/                                # 기상청 Provider
-│   │   ├── KmaWeatherProvider.java         # WeatherProvider 구현체
-│   │   ├── KmaApiClient.java              # 기상청 API 호출 (초단기실황, 단기예보)
-│   │   ├── KmaGridConverter.java          # 위경도 → nx/ny 격자 변환 (Lambert Conformal Conic)
-│   │   └── dto/
-│   │       ├── KmaUltraShortResponse.java # 초단기실황 raw response
-│   │       └── KmaShortForecastResponse.java # 단기예보 raw response
-│   ├── airkorea/                           # 에어코리아 Provider
-│   │   ├── AirKoreaWeatherProvider.java
-│   │   ├── AirKoreaApiClient.java         # 근접측정소 + 대기질 조회
-│   │   └── dto/
-│   │       └── AirKoreaResponse.java
-│   └── openweathermap/                     # OpenWeatherMap Provider
-│       ├── OwmWeatherProvider.java
-│       ├── OwmApiClient.java              # One Call API 3.0
-│       └── dto/
-│           └── OwmOneCallResponse.java
-├── model/                                  # 정규화된 내부 도메인 모델
-│   ├── NormalizedWeatherData.java         # 통합 모델 (current + hourly + daily + air + uv)
-│   ├── CurrentWeather.java
-│   ├── HourlyForecast.java
-│   ├── DailyForecast.java
-│   ├── AirQuality.java
-│   ├── WeatherLocation.java
-│   └── WeatherCondition.java              # enum: CLEAR, CLOUDY, RAIN, SNOW 등
-├── dto/
-│   ├── WeatherRequest.java
-│   └── WeatherResponse.java              # record 기반, 프론트엔드 WeatherData와 1:1 매칭
-└── config/
-    └── WeatherProviderConfig.java         # @ConfigurationProperties(prefix = "weather")
+│   └── model/                             # 정규화된 내부 도메인 모델
+│       ├── NormalizedWeatherData.java      # 통합 모델 (current + hourly + daily + air + uv)
+│       ├── CurrentWeather.java
+│       ├── HourlyForecast.java
+│       ├── DailyForecast.java
+│       ├── AirQuality.java
+│       ├── WeatherLocation.java
+│       └── WeatherCondition.java           # enum: CLEAR, CLOUDY, RAIN, SNOW 등
+└── infrastructure/
+    ├── config/
+    │   └── WeatherProviderConfig.java      # @ConfigurationProperties(prefix = "weather")
+    └── provider/
+        ├── kma/                            # 기상청 Provider
+        │   ├── KmaWeatherProvider.java     # WeatherProvider 구현체
+        │   ├── KmaApiClient.java           # 기상청 API 호출 (초단기실황, 단기예보)
+        │   ├── KmaGridConverter.java       # 위경도 → nx/ny 격자 변환 (Lambert Conformal Conic)
+        │   └── dto/
+        │       └── KmaApiResponse.java     # 기상청 raw response
+        ├── airkorea/                       # 에어코리아 Provider
+        │   ├── AirKoreaWeatherProvider.java
+        │   ├── AirKoreaApiClient.java      # 근접측정소 + 대기질 조회
+        │   └── dto/
+        │       ├── AirKoreaResponse.java
+        │       └── AirKoreaNearbyStationResponse.java
+        └── openweathermap/                 # OpenWeatherMap Provider
+            ├── OwmWeatherProvider.java
+            ├── OwmApiClient.java           # One Call API 3.0
+            └── dto/
+                └── OwmOneCallResponse.java
 ```
 
 ---

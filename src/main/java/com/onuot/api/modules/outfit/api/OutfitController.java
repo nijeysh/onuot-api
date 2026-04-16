@@ -1,4 +1,4 @@
-package com.onuot.api.modules.outfit.interfaces;
+package com.onuot.api.modules.outfit.api;
 
 import com.onuot.api.modules.outfit.application.OutfitService;
 import com.onuot.api.modules.outfit.application.dto.OutfitResponse;
