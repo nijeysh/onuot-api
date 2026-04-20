@@ -1,7 +1,7 @@
 package com.onuot.api.modules.weather.api;
 
 import com.onuot.api.global.common.ApiResponse;
-import com.onuot.api.modules.weather.application.WeatherAggregationService;
+import com.onuot.api.modules.weather.application.WeatherService;
 import com.onuot.api.modules.weather.application.dto.WeatherResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class WeatherController {
 
-    private final WeatherAggregationService weatherAggregationService;
+    private final WeatherService weatherService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<WeatherResponse>> getWeather(
             @RequestParam double latitude,
             @RequestParam double longitude) {
-        WeatherResponse response = weatherAggregationService.getWeather(latitude, longitude);
+        WeatherResponse response = weatherService.getWeather(latitude, longitude);
         return ResponseEntity.ok(ApiResponse.ok(response));
     }
 }

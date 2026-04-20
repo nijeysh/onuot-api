@@ -11,7 +11,9 @@
       "WebFetch(domain:deviq.com)",
       "Bash(xargs sed:*)",
       "Bash(mkdir -p modules)",
-      "Bash(mv member:*)"
+      "Bash(mv member:*)",
+      "Read(//c/Program Files/**)",
+      "Bash(JAVA_HOME=\"/c/Users/syj/.jdks/openjdk-25.0.2\" ./gradlew compileJava)"
     ]
   }
 }

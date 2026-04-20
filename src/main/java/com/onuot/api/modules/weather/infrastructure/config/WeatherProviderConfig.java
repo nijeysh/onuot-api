@@ -16,7 +16,6 @@ public class WeatherProviderConfig {
 
     private CacheConfig cache = new CacheConfig();
     private Map<String, ProviderConfig> providers;
-    private StrategyConfig strategy = new StrategyConfig();
 
     @Getter
     @Setter
@@ -32,17 +31,6 @@ public class WeatherProviderConfig {
         private String baseUrl;
         private String serviceKey;
         private String apiKey;
-    }
-
-    @Getter
-    @Setter
-    public static class StrategyConfig {
-        private WeatherProviderType current = WeatherProviderType.KMA;
-        private WeatherProviderType hourlyForecast = WeatherProviderType.KMA;
-        private WeatherProviderType dailyForecast = WeatherProviderType.KMA;
-        private WeatherProviderType airQuality = WeatherProviderType.AIRKOREA;
-        private WeatherProviderType uvIndex = WeatherProviderType.OPENWEATHERMAP;
-        private WeatherProviderType fallback = WeatherProviderType.OPENWEATHERMAP;
     }
 
     public ProviderConfig getProvider(WeatherProviderType type) {
